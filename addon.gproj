@@ -1,0 +1,8 @@
+GameProject {
+ ID "EnforceScriptExtensions"
+ GUID "5A313B660B04D926"
+ TITLE "Enforce Script Extensions"
+ Dependencies {
+  "58D0FB3206B6F859" "5614BBCCBB55ED1C"
+ }
+}

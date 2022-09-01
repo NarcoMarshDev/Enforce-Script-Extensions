@@ -1,0 +1,46 @@
+ESE_TestingEntity {
+ components {
+  Hierarchy "{5A313B7E4B1D63A5}" {
+  }
+ }
+ coords 123.731 1.231 126.037
+ {
+  $grp GenericEntity {
+   {
+    components {
+     Hierarchy "{5A313B7E40FE4C7F}" {
+     }
+    }
+    coords 1.257 0 1.488
+   }
+   {
+    components {
+     Hierarchy "{5A313B7E40FE4C7F}" {
+     }
+    }
+    coords 2.242 0 0.671
+   }
+   {
+    components {
+     Hierarchy "{5A313B7E40FE4C7F}" {
+     }
+    }
+    coords -1.132 0 2.037
+   }
+   {
+    components {
+     Hierarchy "{5A313B7E40FE4C7F}" {
+     }
+    }
+    coords -2.344 0 3.747
+   }
+   {
+    components {
+     Hierarchy "{5A313B7E40FE4C7F}" {
+     }
+    }
+    coords -3.217 0 1.439
+   }
+  }
+ }
+}
