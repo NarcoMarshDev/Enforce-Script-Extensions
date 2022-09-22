@@ -1,10 +1,12 @@
-//
+// -----------------------------------------------------------------------------------------------------------
 // Enforce Script Extensions - By NarcoMarshmallow
 // 
 // Message me @narcoleptic marshmallow #1188 on discord to give feedback or go to https://github.com/NarcoMarshDev
-//
-#define ESE_VERBOSE
-//#define ESE_ENABLE_WIP
+// -----------------------------------------------------------------------------------------------------------
+
+
+// Different functionality of ESE can be enabled or disabled by defining some different values, go to ESE_Config.c to see how
+
 class ESE
 {
 	// Base class for all ESE static methods, if we ever get modding support for core types many of these will get added to their respective classes as well
@@ -58,52 +60,6 @@ class ESE
 		}
 		return allChildren;
 	}
-	/**
-	Creates new entity from prefab at a given position vector
-	@code
-		vector pos = someEntity.GetOrigin();
-		ResourceName resName = "{3E413771E1834D2F}Prefabs/Weapons/Rifles/M16/Rifle_M16A2.et";
-	
-		IEntity newEntity = ESE.SpawnPrefab(pos, resource);
-	@endcode
-	*/
-	static IEntity SpawnPrefab(vector origin, ResourceName prefabName)
-	{
-		if (!prefabName)
-		{
-			Print("Missing Prefab: " + prefabName, LogLevel.ERROR);
-			return null;
-		}
-		Resource prefab = Resource.Load(prefabName);
-		EntitySpawnParams spawnParams;
-		spawnParams.TransformMode = ETransformMode.WORLD;
-		spawnParams.Transform[3] = origin;
-		
-		return GetGame().SpawnEntityPrefab(prefab, GetGame().GetWorld(), spawnParams);
-	}
-	/**
-	Creates new entity from prefab at a players position
-	@code
-		ResourceName resName = "{3E413771E1834D2F}Prefabs/Weapons/Rifles/M16/Rifle_M16A2.et";
-	
-		IEntity newEntity = ESE.SpawnPrefabOnPlayer(playerId, resName);
-	@endcode
-	*/
-	static IEntity SpawnPrefabOnPlayer(int playerId, ResourceName prefabName)
-	{
-		if (!prefabName)
-		{
-			Print("Missing Prefab: " + prefabName, LogLevel.ERROR);
-			return null;
-		}
-		ChimeraCharacter player = ESE.GetPlayerEntity(playerId);
-		Resource prefab = Resource.Load(prefabName);
-		EntitySpawnParams spawnParams;
-		spawnParams.TransformMode = ETransformMode.WORLD;
-		player.GetWorldTransform(spawnParams.Transform);
-		
-		return GetGame().SpawnEntityPrefab(prefab, player.GetWorld(), spawnParams);
-	}
 	// Deletes entity on server side
 	static void DeleteEntity(IEntity ent)
 	{
@@ -113,16 +69,35 @@ class ESE
 	
 	// ================================ Player ================================
 	
-	// Returns player controlled entity
+	// Returns player controlled entity from given playerId
 	static ChimeraCharacter GetPlayerEntity(int playerId)
 	{
 		return ChimeraCharacter.Cast( GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId) );
 	}
+	
+	// Returns player controlled entity of local machine
+	static ChimeraCharacter GetLocalPlayerEntity()
+	{
+		return ChimeraCharacter.Cast( GetGame().GetPlayerController().GetControlledEntity() );
+	}
+	
 	// Returns player id of given entity, returns 0 if not controlled by player
 	static int GetPlayerId(IEntity ent)
 	{
 		return GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(ent);
 	}
+	
+	// Returns currently equipped weapon of given player character, returns null if weapon is holstered
+	static BaseWeaponComponent GetCurrentWeapon(ChimeraCharacter player)
+	{
+		return player.GetCharacterController().GetWeaponManagerComponent().GetCurrentWeapon();
+	}
+	
+	static void HolsterCurrentWeapon(ChimeraCharacter player)
+	{
+		player.GetCharacterController().SelectWeapon(null);
+	}
+	
 	// Returns alive state of given entity
 	static bool IsEntityAlive(IEntity entity)
 	{
@@ -132,9 +107,11 @@ class ESE
 		else
 			return true;
 	}
+	
+	#ifdef ESE_ENABLE_WIP
 	/**
 	TODO - MAKE SURE THIS WORKS AS INTENDED ON LOCAL PLAYERS WHEN CALLED
-	Returns if given entity is visible on local screen
+	Returns true if given entity is visible on local screen, false otherwise
 	@code
 	@endcode
 	*/
@@ -151,11 +128,59 @@ class ESE
 		vector screenPos = workspace.ProjWorldToScreenNative(worldPos, GetGame().GetWorld());
 		return screenPos[2] > 0 && screenPos[0] > 0 && screenPos[0] < width && screenPos[1] > 0 && screenPos[1] < height);
 	}
+	#endif
+	/**
+	Outputs all available magazines for a given weapon and character into a MagazineComponent array
+	@code
+		ChimeraCharacter player = ESE.GetLocalPlayerEntity();
+		BaseWeaponComponent weapon = ESE.GetCurrentWeapon(player);
+		array<MagazineComponent> arr = {};
 	
+		ESE.FetchMagazines(player, weapon, arr);
+	@endcode
+	*/
+	static void FetchMagazines(ChimeraCharacter character, BaseWeaponComponent weapon, inout array<MagazineComponent> magazines)
+	{
+		magazines.Clear();
+		if (!character || !weapon || !weapon.GetCurrentMuzzle())
+			return;
+
+		InventoryStorageManagerComponent inventory = character.GetCharacterController().GetInventoryStorageManager();
+		if (!inventory)
+			return;
+
+		BaseMuzzleComponent currentMuzzle = weapon.GetCurrentMuzzle();
+		if (!currentMuzzle)
+			return;
+
+		array<typename> components = {};
+		array<IEntity> foundItems = {};
+        components.Insert(MagazineComponent);
+
+		BaseMagazineWell targetWell = currentMuzzle.GetMagazineWell(); // Well, well, well
+		if (!targetWell)
+			return;
+
+		for (int i = inventory.FindItemsWithComponents(foundItems,components, EStoragePurpose.PURPOSE_ANY) -1; i > -1; i--)
+		{
+			MagazineComponent magComp = MagazineComponent.Cast(foundItems[i].FindComponent(MagazineComponent));
+			if (!magComp)
+				continue;
+			
+			BaseMagazineWell well = magComp.GetMagazineWell();
+			if (!well)
+				continue;
+			
+			if (!well.Type().IsInherited(targetWell.Type()))
+				continue;
+
+			magazines.Insert(magComp);
+		}
+	}
 	// ================================ WIP ================================
 	#ifdef ESE_ENABLE_WIP
 	
-	//*
+	/**
 	TODO - Not sure why it's not working but don't use it for now, may have to go back to the GetParent() -> GetAllChildren() type system
 	*/
 	static void GetAllSiblings(IEntity ent, notnull inout array<IEntity> allSiblings)

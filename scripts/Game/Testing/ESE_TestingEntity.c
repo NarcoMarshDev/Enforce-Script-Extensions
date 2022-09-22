@@ -18,7 +18,9 @@ class ESE_TestingEntity : SCR_BaseTriggerEntity
 	
 	protected override void EOnFrame(IEntity owner, float timeSlice)
 	{
-		bool onScreen = ESE.IsEntityOnScreen(owner);
-		Print("onScreen: " + onScreen);
+		
+		ResourceName test = ESE_Aliases.WEP_M21;
+		//bool onScreen = ESE.IsEntityOnScreen(owner);
+		//Print("onScreen: " + onScreen);
 	}
 }

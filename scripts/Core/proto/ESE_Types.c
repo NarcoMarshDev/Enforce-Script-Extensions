@@ -1,4 +1,11 @@
-//#define ESE_EXPERIMENTAL
+// -----------------------------------------------------------------------------------------------------------
+// Enforce Script Extensions - By NarcoMarshmallow
+// 
+// Message me @narcoleptic marshmallow #1188 on discord to give feedback or go to https://github.com/NarcoMarshDev
+//
+// These are all experiemental custom data types, which are not guaranteed to work in their current state, mostly due to modding core
+// classes being unsupported currently, as well as some not supporting inheritance. Very WIP, see ESE.c for more info
+// -----------------------------------------------------------------------------------------------------------
 
 #ifdef ESE_EXPERIMENTAL
 

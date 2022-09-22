@@ -1,63 +1,16 @@
-//
+// -----------------------------------------------------------------------------------------------------------
 // Enforce Script Extensions - By NarcoMarshmallow
 // 
 // Message me @narcoleptic marshmallow #1188 on discord to give feedback or go to https://github.com/NarcoMarshDev
 //
-#define ESE_VERBOSE
+// All static methods for working with entities and the hierarchy
+// -----------------------------------------------------------------------------------------------------------
 
 class ESE_Entities
 {
 	// ESE static methods for handling entities. Will add to IEntity if we get modded class support for core classes
 	
-	/**
-	Outputs array of all child entities of a given parent, children must have "Hierarchy" component to be picked up
-	@code
-		array<IEntity> arr = {};
-		ESE.GetAllChildren(this, arr);
-	@endcode
-	*/
-	static array<IEntity> GetAllChildren(IEntity parent)
-	{
-		if (!parent)
-		{
-			#ifdef ESE_VERBOSE
-			Print("GetAllChildren("+parent+") : NULL parent", LogLevel.VERBOSE);
-			#endif
-			return null;
-		}
-		array<IEntity> allChildren = {};
-		IEntity child = parent.GetChildren();
-		while (child)
-		{
-			allChildren.Insert(child);
-			child = child.GetSibling();
-		}
-		return allChildren;
-	}
-	// See ESE.GetAllChildren - Returns only entities of given type
-	static array<IEntity> GetAllChildrenByType(IEntity parent, typename childClass)
-	{
-		if (!parent || !childClass)
-		{
-			#ifdef ESE_VERBOSE
-			Print("GetAllChildrenByClass("+parent+", "+childClass+") : NULL parent or childClass", LogLevel.VERBOSE);
-			#endif
-			return null;
-		}
-		array<IEntity> allChildren = {};
-		IEntity child = parent.GetChildren();
-		while (child)
-		{
-			if (child.IsInherited(childClass))
-			{
-				allChildren.Insert(child);
-			}
-			child = child.GetSibling();
-		}
-		return allChildren;
-	}
-	
-	// ================================================================ SPAWNING ================================================================ //
+	// ---------------------------------------------------------------- SPAWNING ---------------------------------------------------------------- //
 	
 	/**
 	Creates new entity from prefab at a given position vector
@@ -74,6 +27,10 @@ class ESE_Entities
 		{
 			Print("Missing Prefab: " + prefabName, LogLevel.ERROR);
 			return null;
+		}
+		if (!origin)
+		{
+			origin = Vector(0,0,0);
 		}
 		Resource prefab = Resource.Load(prefabName);
 		EntitySpawnParams spawnParams;
@@ -110,8 +67,52 @@ class ESE_Entities
 	{
 		RplComponent.DeleteRplEntity(ent, false);
 	}
+	static void DeleteEntityByRplId(RplId id)
+	{
+		IEntity ent = IEntity.Cast(Replication.FindItem(id));
+		RplComponent.DeleteRplEntity(ent, false);
+	}
 	
-	// ============================================================= MODELS & MATERIALS ============================================================= //
+	// ------------------------------------------------------------- PHYSICS & COLLISION ------------------------------------------------------------- //
+	
+	static void DisableCollisions(IEntity ent)
+	{
+		Physics parentPhys = ent.GetPhysics();
+		if (parentPhys)
+		{
+			parentPhys.Destroy();
+		}
+		IEntity child = ent.GetChildren();
+		int i = 0;
+		while (child)
+		{
+			Physics p = child.GetPhysics();
+			if (!p)
+			{
+				Print("child: " + child + " no p " + i);
+				i++;
+				child = child.GetSibling();
+				continue;
+			}
+			Print("child: " + child + " yes p " + i);
+			i++;
+			p.Destroy();
+			child = child.GetSibling();
+		}
+	}
+	
+	static void EnableCollisions(IEntity ent, int layerMask = 0xffffffff)
+	{
+		Physics.CreateStatic(ent, layerMask);
+		IEntity child = ent.GetChildren();
+		while (child)
+		{
+			Physics.CreateStatic(child, layerMask);
+			child = child.GetSibling();
+		}
+	}
+	
+	// ------------------------------------------------------------- MODELS & MATERIALS ------------------------------------------------------------- //
 	
 	// See SCR_Global.SetMaterial() - A copy to help with readability
 	static void SetMaterial(IEntity entity, ResourceName material, bool recursively = true)
@@ -207,9 +208,7 @@ class ESE_Entities
 		return screenPos[2] > 0 && screenPos[0] > 0 && screenPos[0] < width && screenPos[1] > 0 && screenPos[1] < height);
 	}
 	
-	//*
-	TODO - Not sure why it's not working but don't use it for now, may have to go back to the GetParent() -> GetAllChildren() type system
-	*/
+	//TODO - Not sure why it's not working but don't use it for now, may have to go back to the GetParent() -> GetAllChildren() type system
 	static void GetAllSiblings(IEntity ent, notnull inout array<IEntity> allSiblings)
 	{
 		if (!ent)
