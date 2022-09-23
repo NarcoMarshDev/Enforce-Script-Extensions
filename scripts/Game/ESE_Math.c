@@ -57,21 +57,21 @@ class ESE_Math
 	// ================================ Obsolete ================================
 	
 	#ifdef ESE_OBSOLETE
-	static float FixFloat180(float val)
+	static float _OLD_FixFloat180(float val)
 	{
 		if 		(val > 180)  {val -= 360;}
 		else if (val < -180) {val += 360;}
 		return val;
 	}
 	
-	static int FixInt180(int val)
+	static int _OLD_FixInt180(int val)
 	{
 		if 		(val > 180)  {val -= 360;}
 		else if (val < -180) {val += 360;}
 		return val;
 	}
 	
-	static vector FixVector180(vector vec)
+	static vector _OLD_FixVector180(vector vec)
 	{
 		for (int a = 0; a < 3; a++)
 		{

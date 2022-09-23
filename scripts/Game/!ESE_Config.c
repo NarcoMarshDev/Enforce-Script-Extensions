@@ -51,3 +51,13 @@
 //#define ESE_ALIASES_MAGAZINES
 //#define ESE_ALIASES_VEHICLES
 //#define ESE_ALIASES_MATH
+
+// Pre-processor enable all other alias defs if ESE_ALIASES_ALL is defined
+#ifdef ESE_ALIASES_ALL
+#define ESE_ALIASES_MATERIALS
+#define ESE_ALIASES_WEAPONS
+#define ESE_ALIASES_ATTACHMENTS
+#define ESE_ALIASES_MAGAZINES
+#define ESE_ALIASES_VEHICLES
+#define ESE_ALIASES_MATH
+#endif
