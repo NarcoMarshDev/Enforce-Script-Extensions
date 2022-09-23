@@ -38,6 +38,7 @@ class ESE
 		}
 		return allChildren;
 	}
+	// -----------------------------------------------------------------------------------------------------------
 	// See ESE.GetAllChildren - Returns only entities of given type
 	static array<IEntity> GetAllChildrenByType(IEntity parent, typename childClass)
 	{
@@ -60,6 +61,7 @@ class ESE
 		}
 		return allChildren;
 	}
+	// -----------------------------------------------------------------------------------------------------------
 	// Deletes entity on server side
 	static void DeleteEntity(IEntity ent)
 	{
@@ -74,30 +76,31 @@ class ESE
 	{
 		return ChimeraCharacter.Cast( GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId) );
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	// Returns player controlled entity of local machine
 	static ChimeraCharacter GetLocalPlayerEntity()
 	{
 		return ChimeraCharacter.Cast( GetGame().GetPlayerController().GetControlledEntity() );
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	// Returns player id of given entity, returns 0 if not controlled by player
 	static int GetPlayerId(IEntity ent)
 	{
 		return GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(ent);
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	// Returns currently equipped weapon of given player character, returns null if weapon is holstered
 	static BaseWeaponComponent GetCurrentWeapon(ChimeraCharacter player)
 	{
 		return player.GetCharacterController().GetWeaponManagerComponent().GetCurrentWeapon();
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
+	// Pretty obvious
 	static void HolsterCurrentWeapon(ChimeraCharacter player)
 	{
 		player.GetCharacterController().SelectWeapon(null);
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	// Returns alive state of given entity
 	static bool IsEntityAlive(IEntity entity)
 	{
@@ -107,7 +110,7 @@ class ESE
 		else
 			return true;
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	#ifdef ESE_ENABLE_WIP
 	/**
 	TODO - MAKE SURE THIS WORKS AS INTENDED ON LOCAL PLAYERS WHEN CALLED
@@ -129,6 +132,7 @@ class ESE
 		return screenPos[2] > 0 && screenPos[0] > 0 && screenPos[0] < width && screenPos[1] > 0 && screenPos[1] < height);
 	}
 	#endif
+	// -----------------------------------------------------------------------------------------------------------
 	/**
 	Outputs all available magazines for a given weapon and character into a MagazineComponent array
 	@code

@@ -39,6 +39,7 @@ class ESE_Entities
 		
 		return GetGame().SpawnEntityPrefab(prefab, GetGame().GetWorld(), spawnParams);
 	}
+	// -----------------------------------------------------------------------------------------------------------
 	/**
 	Creates new entity from prefab at a players position
 	@code
@@ -62,11 +63,13 @@ class ESE_Entities
 		
 		return GetGame().SpawnEntityPrefab(prefab, player.GetWorld(), spawnParams);
 	}
+	// -----------------------------------------------------------------------------------------------------------
 	// Deletes entity on server side
 	static void DeleteEntity(IEntity ent)
 	{
 		RplComponent.DeleteRplEntity(ent, false);
 	}
+	// -----------------------------------------------------------------------------------------------------------
 	static void DeleteEntityByRplId(RplId id)
 	{
 		IEntity ent = IEntity.Cast(Replication.FindItem(id));
@@ -100,7 +103,7 @@ class ESE_Entities
 			child = child.GetSibling();
 		}
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	static void EnableCollisions(IEntity ent, int layerMask = 0xffffffff)
 	{
 		Physics.CreateStatic(ent, layerMask);
@@ -142,7 +145,7 @@ class ESE_Entities
 			}
 		}
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	/**
 	Restores materials of entity and optionally it's children back to its original state
 	\param entity - entity to have materials reset
@@ -207,7 +210,7 @@ class ESE_Entities
 		vector screenPos = workspace.ProjWorldToScreenNative(worldPos, GetGame().GetWorld());
 		return screenPos[2] > 0 && screenPos[0] > 0 && screenPos[0] < width && screenPos[1] > 0 && screenPos[1] < height);
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	//TODO - Not sure why it's not working but don't use it for now, may have to go back to the GetParent() -> GetAllChildren() type system
 	static void GetAllSiblings(IEntity ent, notnull inout array<IEntity> allSiblings)
 	{

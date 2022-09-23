@@ -21,7 +21,7 @@ class ESE_array<Class T> : array<T>
 		}
 		str = temp;
 	}
-
+	// -----------------------------------------------------------------------------------------------------------
 	// Converts contents of array to string if array type is string, will return false if not array<string>
 	bool ToStringTextOnly(out string str)
 	{
@@ -36,13 +36,13 @@ class ESE_array<Class T> : array<T>
 		str = temp;
 		return true;
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	// Returns data type of array
 	typename GetType()
 	{
 		return T;
 	}
-	
+	// -----------------------------------------------------------------------------------------------------------
 	// Casts contents of array to template type of the new array and copies the contents to it
 	bool CastToNewArray(inout ESE_array newArray)
 	{

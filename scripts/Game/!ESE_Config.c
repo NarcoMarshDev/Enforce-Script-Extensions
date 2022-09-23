@@ -4,6 +4,7 @@
 // Message me @narcoleptic marshmallow #1188 on discord to give feedback or go to https://github.com/NarcoMarshDev
 // -----------------------------------------------------------------------------------------------------------
 
+// REMEMBER TO CHANGE THIS TO USING THE DEFINES IN THE PROJECT OPTIONS MENU OR PEOPLE WILL RIOT!!!
 
 /** -------------------------------------------------------- READ THIS --------------------------------------------------------
 
@@ -33,16 +34,18 @@
 		#define ESE_ALIASES_WEAPONS		- All base game weapon ResourceNames
 		#define ESE_ALIASES_ATTACHMENTS	- All base game attachment ResourceNames
 		#define ESE_ALIASES_MAGAZINES 	- All base game magazine ResourceNames
+		#define ESE_ALIASES_VEHICLES	- All base game vehicle ResourceNames (almost, missing some odd variats)
 		#define ESE_ALIASES_MATH 		- Useful mathematical constants and such like
 
 @endcode
 */
+#define ESE_INSTALLED // Always keep this enabled to ensure mod compatiblity with aliases
 
-#define ESE_VERBOSE
+//#define ESE_VERBOSE
 //#define ESE_ENABLE_WIP
 //#define ESE_EXPERIMENTAL
 //#define ESE_OBSOLETE
-#define ESE_ALIASES_ALL
+//#define ESE_ALIASES_ALL
 //#define ESE_ALIASES_MATERIALS
 //#define ESE_ALIASES_WEAPONS
 //#define ESE_ALIASES_ATTACHMENTS
