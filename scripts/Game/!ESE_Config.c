@@ -39,7 +39,6 @@
 
 @endcode
 */
-#define ESE_INSTALLED // Always keep this enabled to ensure mod compatiblity with aliases
 
 //#define ESE_VERBOSE
 //#define ESE_ENABLE_WIP
