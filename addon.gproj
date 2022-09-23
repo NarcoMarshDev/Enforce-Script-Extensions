@@ -10,9 +10,6 @@ GameProject {
    ScriptProjectManagerSettings ScriptProjectManagerSettings "{AC4BE58770485E4B}" {
     Configurations {
      ScriptConfigurationClass workbench {
-      Defines + {
-       "ESE_ALIASES_ALL"
-      }
      }
     }
    }

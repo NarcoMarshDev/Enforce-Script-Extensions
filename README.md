@@ -1,5 +1,7 @@
 # Enforce-Script-Extensions
 A collection of new data types, methods, aliases etc. for Arma Reforger to help streamline the scripting experience.
+
+For full documentation, [see the wiki](https://github.com/NarcoMarshDev/Enforce-Script-Extensions/wiki).
 # Installation
 __I DO NOT RECOMMEND INSTALLING ESE IN THIS PRERELEASE STATE AS A FULL PROJECT__
 
