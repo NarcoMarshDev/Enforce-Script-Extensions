@@ -3,11 +3,65 @@
 // 
 // Message me @narcoleptic marshmallow #1188 on discord to give feedback or go to https://github.com/NarcoMarshDev
 // -----------------------------------------------------------------------------------------------------------
+
 class ESE_Aliases
 {
+	
+	
+	
 	// TESTING, REMOVE BEFORE RELEASE!!!
 	//#define ESE_ALIASES_ALL
-			
+	
+	private static ref array<ResourceName> m_pAliasRegister = {};
+	
+	private static ResourceName CreateAlias(ResourceName path)
+	{
+		m_pAliasRegister.Insert(path);
+		return path;
+	}
+	
+	static void RemoveAliasFromRegister(ResourceName alias) 	{m_pAliasRegister.RemoveItem(alias);}
+	static void DebugRegister() 								{m_pAliasRegister.Debug();}
+	
+	// testing
+	string title1 = "test1";
+	string title2 = "test2";
+	static const ResourceName WEP_TEST				= CreateAlias("{FA5C25BF66A53DCF}Prefabs/Weapons/Rifles/AK74/Rifle_AK74.et");
+	
+	//Debug.BeginTimeMeasure();
+	// RIFLES
+	static const ResourceName TEST_WEP_AK74			= CreateAlias("{FA5C25BF66A53DCF}Prefabs/Weapons/Rifles/AK74/Rifle_AK74.et");
+	static const ResourceName TEST_WEP_AK74_GP25	= CreateAlias("{63E8322E2ADD4AA7}Prefabs/Weapons/Rifles/AK74/Rifle_AK74_GP25.et");
+	static const ResourceName TEST_WEP_M21			= CreateAlias("{B31929F65F0D0279}Prefabs/Weapons/Rifles/M14/Rifle_M21.et");
+	static const ResourceName TEST_WEP_M21_ARTII	= CreateAlias("{81EB948E6414BD6F}Prefabs/Weapons/Rifles/M14/Rifle_M21_ARTII.et");
+	static const ResourceName TEST_WEP_M16A2 		= CreateAlias("{3E413771E1834D2F}Prefabs/Weapons/Rifles/M16/Rifle_M16A2.et");
+	static const ResourceName TEST_WEP_M16A2_M203 	= CreateAlias("{5A987A8A13763769}Prefabs/Weapons/Rifles/M16/Rifle_M16A2_M203.et");
+	static const ResourceName TEST_WEP_SVD 			= CreateAlias("{3EB02CDAD5F23C82}Prefabs/Weapons/Rifles/SVD/Rifle_SVD.et");
+	static const ResourceName TEST_WEP_SVD_PSO 		= CreateAlias("{6415B7923DE28C1B}Prefabs/Weapons/Rifles/SVD/Rifle_SVD_PSO.et");
+	// LMGS
+	static const ResourceName TEST_WEP_M249 		= CreateAlias("{D2B48DEBEF38D7D7}Prefabs/Weapons/MachineGuns/M249/MG_M249.et");
+	static const ResourceName TEST_WEP_M60 			= CreateAlias("{D182DCDD72BF7E34}Prefabs/Weapons/MachineGuns/M60/MG_M60.et");
+	static const ResourceName TEST_WEP_PKM 			= CreateAlias("{A89BC9D55FFB4CD8}Prefabs/Weapons/MachineGuns/PKM/MG_PKM.et");
+	static const ResourceName TEST_WEP_RPK74 		= CreateAlias("{A7AF84C6C58BA3E8}Prefabs/Weapons/MachineGuns/RPK74/MG_RPK74.et");
+	// HANDGUNS
+	static const ResourceName TEST_WEP_M9 			= CreateAlias("{1353C6EAD1DCFE43}Prefabs/Weapons/Handguns/M9/Handgun_M9.et");
+	static const ResourceName TEST_WEP_PM 			= CreateAlias("{C0F7DD85A86B2900}Prefabs/Weapons/Handguns/PM/Handgun_PM.et");
+	// LAUNCHERS
+	static const ResourceName TEST_WEP_M72A3 		= CreateAlias("{9C5C20FB0E01E64F}Prefabs/Weapons/Launchers/M72/Launcher_M72A3.et");
+	static const ResourceName TEST_WEP_RPG7 		= CreateAlias("{7A82FE978603F137}Prefabs/Weapons/Launchers/RPG7/Launcher_RPG7.et");
+	// FRAG GRENADES
+	static const ResourceName TEST_WEP_M67 			= CreateAlias("{E8F00BF730225B00}Prefabs/Weapons/Grenades/Grenade_M67.et");
+	static const ResourceName TEST_WEP_RGD5 		= CreateAlias("{645C73791ECA1698}Prefabs/Weapons/Grenades/Grenade_RGD5.et");
+	// SMOKE GRENADES
+	static const ResourceName TEST_WEP_ANM8HC 		= CreateAlias("{9DB69176CEF0EE97}Prefabs/Weapons/Grenades/Smoke_ANM8HC.et");
+	static const ResourceName TEST_WEP_RDG2 		= CreateAlias("{77EAE5E07DC4678A}Prefabs/Weapons/Grenades/Smoke_RDG2.et");
+	static const ResourceName TEST_WEP_M18_WHITE 	= CreateAlias("{AD2709F5F6F0D871}Prefabs/Weapons/Grenades/M18/Smoke_M18_Base.et");
+	static const ResourceName TEST_WEP_M18_GREEN 	= CreateAlias("{D41D22DD1B8E921E}Prefabs/Weapons/Grenades/M18/Smoke_M18_Green.et");
+	static const ResourceName TEST_WEP_M18_RED 		= CreateAlias("{3343A055A83CB30D}Prefabs/Weapons/Grenades/M18/Smoke_M18_Red.et");
+	static const ResourceName TEST_WEP_M18_VIOLET 	= CreateAlias("{14C1A0F061D9DDEE}Prefabs/Weapons/Grenades/M18/Smoke_M18_Violet.et");
+	static const ResourceName TEST_WEP_M18_YELLOW 	= CreateAlias("{9BBDEE253A16CC66}Prefabs/Weapons/Grenades/M18/Smoke_M18_Yellow.et");
+	//Debug.EndTimeMeasure(title1);
+	
 	// ---------------------------------------------------------------- MATERIALS ---------------------------------------------------------------- //
 	
 	#ifdef ESE_ALIASES_MATERIALS
@@ -104,4 +158,5 @@ class ESE_Aliases
 	
 	static const ResourceName VEH_BTR70					= "{C012BB3488BEA0C2}Prefabs/Vehicles/Wheeled/BTR70/BTR70.et";
 	#endif
+	
 }

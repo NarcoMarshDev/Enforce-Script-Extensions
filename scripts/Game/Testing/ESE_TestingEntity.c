@@ -6,14 +6,9 @@ class ESE_TestingEntity : SCR_BaseTriggerEntity
 {
 	protected override void EOnInit(IEntity owner)
 	{
-		Print("" + this + "loaded");
-		
-		array<IEntity> arr = ESE.GetAllChildrenByType(this, GenericEntity);
-		
-		Print("arr: " + arr);
-		Print("len: " + arr.Count());
-		
-		
+		ESE_Aliases.DebugRegister();
+		ESE_Aliases.RemoveAliasFromRegister(ESE_Aliases.TEST_WEP_M18_RED);
+		ESE_Aliases.DebugRegister();
 	}
 	
 	protected override void EOnFrame(IEntity owner, float timeSlice)
