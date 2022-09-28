@@ -4,8 +4,9 @@
 // Message me @narcoleptic marshmallow #1188 on discord to give feedback or go to https://github.com/NarcoMarshDev
 // -----------------------------------------------------------------------------------------------------------
 
+#ifdef ESE_EXPERIMENTAL
 class HierarchyMap<Class T>
 {
 
 }
-
+#endif

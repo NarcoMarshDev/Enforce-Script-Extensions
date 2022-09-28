@@ -2,14 +2,12 @@
 // Enforce Script Extensions - By NarcoMarshmallow
 // 
 // Message me @narcoleptic marshmallow #1188 on discord to give feedback or go to https://github.com/NarcoMarshDev
-// -----------------------------------------------------------------------------------------------------------
-
-// REMEMBER TO CHANGE THIS TO USING THE DEFINES IN THE PROJECT OPTIONS MENU OR PEOPLE WILL RIOT!!!
-
 /** -------------------------------------------------------- READ THIS --------------------------------------------------------
 
 	Different functionality of ESE can be enabled or disabled by defining some different values. To do so, duplicate this file
 	and name it ' !ESE_Config.c ' and then uncomment whatever #define statements you want, to enable those features.
+
+	Full documentation : https://github.com/NarcoMarshDev/Enforce-Script-Extensions/wiki/Setting-Up-ESE#making-your-ese-config
 
 	-------------------------------------------------------- READ THIS --------------------------------------------------------
 
@@ -37,6 +35,9 @@
 		#define ESE_ALIASES_VEHICLES	- All base game vehicle ResourceNames (almost, missing some odd variats)
 		#define ESE_ALIASES_MATH 		- Useful mathematical constants and such like
 
+#define ESE_ALIASES_DEBUG
+	- Enables some extra debugging features to help with implementing custom aliases.
+
 @endcode
 */
 
@@ -44,20 +45,25 @@
 //#define ESE_ENABLE_WIP
 //#define ESE_EXPERIMENTAL
 //#define ESE_OBSOLETE
-#define ESE_ALIASES_ALL
+//#define ESE_ALIASES_ALL
 //#define ESE_ALIASES_MATERIALS
 //#define ESE_ALIASES_WEAPONS
 //#define ESE_ALIASES_ATTACHMENTS
 //#define ESE_ALIASES_MAGAZINES
+//#define ESE_ALIASES_EQUIPMENT
 //#define ESE_ALIASES_VEHICLES
 //#define ESE_ALIASES_MATH
+//#define ESE_ALIASES_DEBUG
 
-// Pre-processor enable all other alias defs if ESE_ALIASES_ALL is defined
+// -------------------- DO NOT MODIFY BEYOND THIS POINT --------------------
+
+// Pre-processor enable all other alias defines if ESE_ALIASES_ALL is defined
 #ifdef ESE_ALIASES_ALL
 #define ESE_ALIASES_MATERIALS
 #define ESE_ALIASES_WEAPONS
 #define ESE_ALIASES_ATTACHMENTS
 #define ESE_ALIASES_MAGAZINES
+#define ESE_ALIASES_EQUIPMENT
 #define ESE_ALIASES_VEHICLES
 #define ESE_ALIASES_MATH
 #endif
