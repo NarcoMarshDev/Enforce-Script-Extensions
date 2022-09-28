@@ -22,7 +22,7 @@ class ESE
 {	
 	static const int VERSION_MAJOR = 0;
 	static const int VERSION_MINOR = 1;
-	static const int VERSION_PATCH = 1;
+	static const int VERSION_PATCH = 2;
 	// initialize ese on startup, called in !ESE_CORE.c
 	static bool Init()
 	{
