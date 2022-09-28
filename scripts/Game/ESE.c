@@ -141,38 +141,6 @@ class ESE
 		player.GetCharacterController().SelectWeapon(null);
 	}
 	// -----------------------------------------------------------------------------------------------------------
-	// Returns alive state of given entity
-	static bool IsEntityAlive(IEntity entity)
-	{
-		DamageManagerComponent damageManager = DamageManagerComponent.Cast(entity.FindComponent(DamageManagerComponent));
-		if (damageManager)
-			return damageManager.GetState() != EDamageState.DESTROYED;
-		else
-			return true;
-	}
-	// -----------------------------------------------------------------------------------------------------------
-	#ifdef ESE_ENABLE_WIP
-	/**
-	TODO - MAKE SURE THIS WORKS AS INTENDED ON LOCAL PLAYERS WHEN CALLED
-	Returns true if given entity is visible on local screen, false otherwise
-	@code
-	@endcode
-	*/
-	static bool IsEntityOnScreen(IEntity ent)
-	{
-		WorkspaceWidget workspace = GetGame().GetWorkspace();
-		float width, height;
-		workspace.GetScreenSize(width, height);
-		
-		vector worldPos = ent.GetOrigin();
-		if (!worldPos)
-			return false;
-		
-		vector screenPos = workspace.ProjWorldToScreenNative(worldPos, GetGame().GetWorld());
-		return screenPos[2] > 0 && screenPos[0] > 0 && screenPos[0] < width && screenPos[1] > 0 && screenPos[1] < height);
-	}
-	#endif
-	// -----------------------------------------------------------------------------------------------------------
 	/**
 	Outputs all available magazines for a given weapon and character into a MagazineComponent array
 	@code

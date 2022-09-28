@@ -75,6 +75,16 @@ class ESE_Entities
 		IEntity ent = IEntity.Cast(Replication.FindItem(id));
 		RplComponent.DeleteRplEntity(ent, false);
 	}
+	// -----------------------------------------------------------------------------------------------------------
+	// Returns alive state of given entity
+	static bool IsEntityAlive(IEntity entity)
+	{
+		DamageManagerComponent damageManager = DamageManagerComponent.Cast(entity.FindComponent(DamageManagerComponent));
+		if (damageManager)
+			return damageManager.GetState() != EDamageState.DESTROYED;
+		else
+			return true;
+	}
 	
 	// ------------------------------------------------------------- PHYSICS & COLLISION ------------------------------------------------------------- //
 	
