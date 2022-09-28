@@ -191,7 +191,12 @@ class ESE_Aliases
 	static const ResourceName AR_MAG_KPVT_MIX 		= CreateAlias("{8257B5AFDE7AE5CB}Prefabs/Weapons/Magazines/Box_145x114_KPVT_50rnd_4API_1APIT.et", 			ESE_ResourceType.HeavyWeaponAmmo);
 	#endif
 	
-	// ----------------------------------------------------------------- EQUIPMENT ----------------------------------------------------------------- //
+	// ----------------------------------------------------------------- UNIFORMS ----------------------------------------------------------------- //
+	#ifdef ESE_ALIASES_UNIFORMS
+	// TODO
+	#endif
+	
+	// ---------------------------------------------------------------- EQUIPMENT ----------------------------------------------------------------- //
 	
 	#ifdef ESE_ALIASES_EQUIPMENT
 	// TODO

@@ -46,10 +46,10 @@ class ESE
 		if (mainProjectName == "Enforce Script Extensions")
 		{
 			#ifdef ESE_DEVMODE
-			Print("ESE is in development mode, remember to goto !ESE_Config_EnforceScriptExtensions.c and disable before release");
+			Print("ESE is in development mode, remember to goto !ESE_Config_EnforceScriptExtensions.c and disable before release", LogLevel.WARNING);
 			#endif
 			#ifndef ESE_DEVMODE
-			Print("ESE is not in development mode, goto !ESE_Config_EnforceScriptExtensions.c and enable it to enable all features");
+			Print("ESE is not in development mode, goto !ESE_Config_EnforceScriptExtensions.c and enable it to access all features", LogLevel.WARNING);
 			#endif
 		}
 				
