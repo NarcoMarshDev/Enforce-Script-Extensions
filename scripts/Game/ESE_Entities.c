@@ -127,6 +127,16 @@ class ESE_Entities
 	
 	// ------------------------------------------------------------- MODELS & MATERIALS ------------------------------------------------------------- //
 	
+	// #ESE_ADD_DOCUMENTATION
+	static void GetMaterial(IEntity entity, out string materials[], out int numMaterials)
+	{
+		VObject mesh = entity.GetVObject();
+		if (mesh)
+		{
+			numMaterials = mesh.GetMaterials(materials);
+		}
+	}
+	
 	// See SCR_Global.SetMaterial() - A copy to help with readability
 	static void SetMaterial(IEntity entity, ResourceName material, bool recursively = true)
 	{
