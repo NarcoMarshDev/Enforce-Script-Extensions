@@ -8,6 +8,24 @@
 
 class ESE_Math
 {
+	// #ESE_ADD_DOCUMENTATION
+	static float CeilToNearestMultiple(float number, float multiple)
+	{
+    	if (multiple != 0 && number != 0)
+		{
+			float sign;
+			if (number > 0) {sign = 1;}
+			else			{sign = -1;}
+        	number *= sign;
+        	number /= multiple;
+        	int fixedPoint = Math.Ceil(number);
+        	number = fixedPoint * multiple;
+        	number *= sign;
+    	}
+    	return number;
+	}
+	
+	
 	/**
 	Fixes given value to modulo of 360 and then within -180 and 180, used mostly for rotation values
 	@code
@@ -38,9 +56,38 @@ class ESE_Math
 	// See FixInt180(), same but for vectors
 	static vector FixVector180(vector vec)
 	{
-		for (int i = 0; i < vec.Length(); i++)
+		for (int i = 0; i < vec.Length() - 1; i++)
 		{
 			vec[i] = FixFloat180(vec[i]);
+		}
+		return vec;
+	}
+	//-----------------------------------------------------------------------------------------------------------
+	// Fast versions for when input is known to be between -360 & 360
+	static float FastFixFloat180(float val)
+	{
+		if 		(val > 180)  {val -= 360;}
+		else if (val < -180) {val += 360;}
+		return val;
+	}
+	
+	static int FastFixInt180(int val)
+	{
+		if 		(val > 180)  {val -= 360;}
+		else if (val < -180) {val += 360;}
+		return val;
+	}
+	
+	static vector FastFixVector180(vector vec)
+	{
+		for (int a = 0; a < 3; a++)
+		{
+			float v = vec[a];
+			while (v > 180)
+				v -= 360;
+			while (v < -180)
+				v += 360;
+			vec[a] = v;
 		}
 		return vec;
 	}
