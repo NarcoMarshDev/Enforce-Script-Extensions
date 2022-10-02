@@ -123,6 +123,16 @@ class ESE
 		return ChimeraCharacter.Cast( GetGame().GetPlayerController().GetControlledEntity() );
 	}
 	// -----------------------------------------------------------------------------------------------------------
+	static PlayerController GetPlayerControllerFromEntity(IEntity ent)
+	{
+		return GetGame().GetPlayerManager().GetPlayerController( GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(ent) );
+	}
+	// -----------------------------------------------------------------------------------------------------------
+	static PlayerController GetPlayerControllerFromId(int playerId)
+	{
+		return GetGame().GetPlayerManager().GetPlayerController(playerId);
+	}
+	// -----------------------------------------------------------------------------------------------------------
 	// Returns player id of given entity, returns 0 if not controlled by player
 	static int GetPlayerId(IEntity ent)
 	{

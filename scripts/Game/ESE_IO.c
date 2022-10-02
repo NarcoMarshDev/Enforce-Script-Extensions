@@ -9,6 +9,7 @@ class ESE_IO
 	{
 		FileHandle f = FileIO.OpenFile(path, FileMode.READ);
 		int readLen = f.ReadFile(arr, length);
+		f.CloseFile();
 		return readLen;
 	}
 	// -----------------------------------------------------------------------------------------------------------
