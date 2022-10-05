@@ -152,10 +152,10 @@ class ESE_Queue<Class T>
 		newArray.Copy(Raw);
 	}
 	// ----------------------------------------------------------------------------------------------------------- //
-	void CopyToQueue(notnull inout ESE_Queue<T> newQueue)
+	void CopyToDynamicQueue(notnull inout ESE_DynamicQueue<T> newQueue)
 	{
 		newQueue.Raw.Copy(this.Raw);
-		newQueue.Resize(MaxSize);
+		newQueue.Compact();
 	}
 	// ----------------------------------------------------------------------------------------------------------- //
 	void CopyFromArray(notnull array<T> oldArray)
