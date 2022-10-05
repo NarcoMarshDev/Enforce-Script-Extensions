@@ -131,10 +131,7 @@ class ESE_Queue<Class T>
 		int sizeDifference = MaxSize - size;
 		if (sizeDifference > 0)
 		{
-			for (int i = 0; i < sizeDifference; i++)
-			{
-				Dequeue();
-			}
+			Raw.Resize(size);
 		}
 		MaxSize = size;
 		Raw.Compact();
