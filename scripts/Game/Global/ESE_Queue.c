@@ -75,7 +75,7 @@ class ESE_Queue<Class T>
 		return value;
 	}
 	// ----------------------------------------------------------------------------------------------------------- //
-	bool TryDequeue(T output)
+	bool TryDequeue(out T output)
 	{
 		int lastIndex = Raw.Count() - 1;
 		if (lastIndex < 0)
@@ -91,7 +91,7 @@ class ESE_Queue<Class T>
 		return true;
 	}
 	// ----------------------------------------------------------------------------------------------------------- //
-	bool TryPeek(T output)
+	bool TryPeek(out T output)
 	{
 		int lastIndex = Raw.Count() - 1;
 		if (lastIndex < 0)
