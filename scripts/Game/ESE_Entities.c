@@ -15,27 +15,29 @@ class ESE_Entities
 	/**
 	Creates new entity from prefab at a given position vector
 	@code
-		vector pos = someEntity.GetOrigin();
+		vector mat = someEntity.GetTransform();
 		ResourceName resName = "{3E413771E1834D2F}Prefabs/Weapons/Rifles/M16/Rifle_M16A2.et";
 	
-		IEntity newEntity = ESE.SpawnPrefab(pos, resource);
+		IEntity newEntity = ESE.SpawnPrefab(mat, resource);
 	@endcode
 	*/
-	static IEntity SpawnPrefab(vector origin, ResourceName prefabName)
+	// #ESE_UPDATE_DOCUMENTATION - changed from using origin to transform
+	static IEntity SpawnPrefab(vector transform[4], ResourceName prefabName)
 	{
 		if (!prefabName)
 		{
 			Print("Missing Prefab: " + prefabName, LogLevel.ERROR);
 			return null;
 		}
-		if (!origin)
+		if (!transform)
 		{
-			origin = Vector(0,0,0);
+			Print("No valid transform! Using default transform instead.", LogLevel.WARNING);
+			Math3D.MatrixIdentity4(transform)
 		}
 		Resource prefab = Resource.Load(prefabName);
-		EntitySpawnParams spawnParams;
+		EntitySpawnParams spawnParams = new EntitySpawnParams();
 		spawnParams.TransformMode = ETransformMode.WORLD;
-		spawnParams.Transform[3] = origin;
+		spawnParams.Transform = transform;
 		
 		return GetGame().SpawnEntityPrefab(prefab, GetGame().GetWorld(), spawnParams);
 	}

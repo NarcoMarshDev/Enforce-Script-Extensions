@@ -4,7 +4,7 @@
 // Message me @narcoleptic marshmallow #1188 on discord to give feedback or go to https://github.com/NarcoMarshDev
 // -----------------------------------------------------------------------------------------------------------
 class ESE_IO
-{
+{	
 	static int ReadFileAsArray(string path, inout array<string> arr, int length)
 	{
 		FileHandle f = FileIO.OpenFile(path, FileMode.READ);
@@ -12,6 +12,28 @@ class ESE_IO
 		f.CloseFile();
 		return readLen;
 	}
+	
+	// #ESE_ADD_DOCUMENTATION
+	// Works like csv reader but using space delimiters instead of commas
+	static int ReadSpaceDelimitedFileAsArray(string path, inout array<array<string>> output)
+	{
+		output.Clear();
+		ParseHandle file = FileIO.BeginParse(path);
+		int lineNumber = 0;
+		int charNum = 0;
+		while (true)
+		{
+			array<string> line = {};
+			charNum = file.ParseLine(lineNumber, line);
+			if (charNum == -1) {break;} // if end of file, break and dont push line to output
+			
+			output.Insert(line);
+			lineNumber++;
+		}
+		file.EndParse();
+		return lineNumber;
+	}
+	
 	// -----------------------------------------------------------------------------------------------------------
 	#ifdef ESE_ENABLE_WIP
 	static string ReadFileAsString(string path)
