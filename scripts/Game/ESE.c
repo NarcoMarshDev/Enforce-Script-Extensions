@@ -21,40 +21,8 @@ Code example:
 class ESE
 {	
 	static const int VERSION_MAJOR = 0;
-	static const int VERSION_MINOR = 1;
-	static const int VERSION_PATCH = 3;
-	// initialize ese on startup, called in !ESE_CORE.c
-	static bool Init()
-	{
-		if (ESE_IS_INITIALIZED)
-		{
-			Print("ESE.Init() already called", LogLevel.WARNING);
-			return true;
-		}
-		
-		// print version info on init
-		Print("Loaded ESE v" + VERSION_MAJOR + "." + VERSION_MINOR + "." + VERSION_PATCH);
-		if (VERSION_MAJOR == 0)
-		{
-		Print("WARNING: This is a pre-release version of Enforce Script Extensions, future compatibility is not guaranteed!", LogLevel.WARNING);
-		}
-		
-		// get all addons and find the first one (the currently open project)
-		array<string> availableAddons = {};
-		GameProject.GetAvailableAddons(availableAddons);
-		string mainProjectName = GameProject.GetAddonTitle(availableAddons[0]);
-		if (mainProjectName == "Enforce Script Extensions")
-		{
-			#ifdef ESE_DEVMODE
-			Print("ESE is in development mode, remember to goto !ESE_Config_EnforceScriptExtensions.c and disable before release", LogLevel.WARNING);
-			#endif
-			#ifndef ESE_DEVMODE
-			Print("ESE is not in development mode, goto !ESE_Config_EnforceScriptExtensions.c and enable it to access all features", LogLevel.WARNING);
-			#endif
-		}
-				
-		return true;
-	}
+	static const int VERSION_MINOR = 2;
+	static const int VERSION_PATCH = 2;
 	
 	// Base class for all ESE static methods, if we ever get modding support for core types many of these will get added to their respective classes as well
 	
@@ -227,4 +195,92 @@ class ESE
 	
 	
 	#endif
+	
+	// ---------------------------------------------------------------- Initialization ---------------------------------------------------------------- //
+	
+	// This is a huge mess of #ifdef's and all it does it print version information at runtime to the console and the current defines. Kinda useful but
+	// not really, may remove later or at least move to another file.
+	
+	// initialize ese on startup, called in !ESE_CORE.c
+	static bool Init()
+	{
+		if (ESE_IS_INITIALIZED)
+		{
+			Print("ESE.Init() already called", LogLevel.WARNING);
+			return true;
+		}
+		
+		// print version info on init
+		Print("--------------------------------");
+		Print("Loaded ESE v" + VERSION_MAJOR + "." + VERSION_MINOR + "." + VERSION_PATCH);
+		
+		Print("ESE config defines enabled:");
+		#ifdef ESE_VERBOSE
+		Print("- ESE_VERBOSE");
+		#endif
+		#ifdef ESE_ENABLE_WIP
+		Print("- ESE_ENABLE_WIP");
+		#endif
+		#ifdef ESE_EXPERIMENTAL
+		Print("- ESE_EXPERIMENTAL");
+		#endif
+		#ifdef ESE_OBSOLETE
+		Print("- ESE_OBSOLETE");
+		#endif
+		#ifdef ESE_ALIASES_ALL
+		Print("- ESE_ALIASES_ALL");
+		#endif
+		
+		// don't print these if all is enabled
+		#ifndef ESE_ALIASES_ALL
+		
+		#ifdef ESE_ALIASES_MATERIALS
+		Print("- ESE_ALIASES_MATERIALS");
+		#endif
+		#ifdef ESE_ALIASES_WEAPONS
+		Print("- ESE_ALIASES_WEAPONS");
+		#endif
+		#ifdef ESE_ALIASES_ATTACHMENTS
+		Print("- ESE_ALIASES_ATTACHMENTS");
+		#endif
+		#ifdef ESE_ALIASES_MAGAZINES
+		Print("- ESE_ALIASES_MAGAZINES");
+		#endif
+		#ifdef ESE_ALIASES_UNIFORMS
+		Print("- ESE_ALIASES_UNIFORMS");
+		#endif
+		#ifdef ESE_ALIASES_EQUIPMENT
+		Print("- ESE_ALIASES_EQUIPMENT");
+		#endif
+		#ifdef ESE_ALIASES_VEHICLES
+		Print("- ESE_ALIASES_VEHICLES");
+		#endif
+		
+		#endif
+		
+		#ifdef ESE_ALIASES_DEBUG
+		Print("- ESE_ALIASES_DEBUG");
+		#endif
+		
+		if (VERSION_MAJOR == 0)
+		{
+		Print("WARNING: This is a pre-release version of Enforce Script Extensions, future compatibility is not guaranteed!", LogLevel.WARNING);
+		}
+		
+		// get all addons and find the first one (the currently open project)
+		array<string> availableAddons = {};
+		GameProject.GetAvailableAddons(availableAddons);
+		string mainProjectName = GameProject.GetAddonTitle(availableAddons[0]);
+		if (mainProjectName == "Enforce Script Extensions")
+		{
+			#ifdef ESE_DEVMODE
+			Print("ESE is in development mode, remember to goto !ESE_Config_EnforceScriptExtensions.c and disable before release", LogLevel.WARNING);
+			#endif
+			#ifndef ESE_DEVMODE
+			Print("ESE is not in development mode, goto !ESE_Config_EnforceScriptExtensions.c and enable it to access all features", LogLevel.WARNING);
+			#endif
+		}
+		Print("--------------------------------");
+		return true;
+	}
 }

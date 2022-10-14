@@ -90,35 +90,35 @@ class ESE_Entities
 	
 	// ------------------------------------------------------------- PHYSICS & COLLISION ------------------------------------------------------------- //
 	
-	static void DisableCollisions(IEntity ent)
+	static void DisableCollisions(IEntity ent, bool applyToChildren=true)
 	{
 		Physics parentPhys = ent.GetPhysics();
 		if (parentPhys)
-		{
 			parentPhys.Destroy();
-		}
+		
+		if (!applyToChildren)
+			return;
+		
 		IEntity child = ent.GetChildren();
-		int i = 0;
 		while (child)
 		{
 			Physics p = child.GetPhysics();
 			if (!p)
 			{
-				Print("child: " + child + " no p " + i);
-				i++;
 				child = child.GetSibling();
 				continue;
 			}
-			Print("child: " + child + " yes p " + i);
-			i++;
 			p.Destroy();
 			child = child.GetSibling();
 		}
 	}
 	// -----------------------------------------------------------------------------------------------------------
-	static void EnableCollisions(IEntity ent, int layerMask = 0xffffffff)
+	static void EnableCollisions(IEntity ent, bool applyToChildren=true, int layerMask = 0xffffffff)
 	{
 		Physics.CreateStatic(ent, layerMask);
+		if (!applyToChildren)
+			return;		
+		
 		IEntity child = ent.GetChildren();
 		while (child)
 		{
@@ -130,6 +130,7 @@ class ESE_Entities
 	// ------------------------------------------------------------- MODELS & MATERIALS ------------------------------------------------------------- //
 	
 	// #ESE_ADD_DOCUMENTATION
+	// To be safe, use a string[256] array as the input for materials, use less for memory optimasation though if needed
 	static void GetMaterial(IEntity entity, out string materials[], out int numMaterials)
 	{
 		VObject mesh = entity.GetVObject();
