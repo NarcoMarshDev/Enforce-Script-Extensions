@@ -1,4 +1,4 @@
-# Enforce-Script-Extensions v0.2.2 pre-release
+# Enforce-Script-Extensions v0.2.1 pre-release
 A collection of new data types, methods, aliases etc. for Arma Reforger to help streamline the scripting experience.
 
 For full documentation, [see the wiki](https://github.com/NarcoMarshDev/Enforce-Script-Extensions/wiki).

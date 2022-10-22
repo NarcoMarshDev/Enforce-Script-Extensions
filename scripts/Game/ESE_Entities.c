@@ -126,6 +126,121 @@ class ESE_Entities
 			child = child.GetSibling();
 		}
 	}
+	// -----------------------------------------------------------------------------------------------------------
+	// #ESE_ADD_DOCUMENTATION
+	/**
+	Snaps given entity to whatever is underneath it as long as it is less than maxHeight away.
+	Similar to SCR_TerrainHelper.SnapToTerrain() but uses a trace so it will snap to any entity not just the world terrain
+	
+	\param ent - the entity to have it's position snapped
+	\param maxHeight - the max distance the trace will move looking for a valid entity or terrain to snap to - HIGHER VALUES HAVE A HIGHER PERFORMANCE COST
+	\param noUnderwater - whether the entity will get snapped to the water surface or sea floor if used over water - #ESE_TODO
+	*/
+	static void SnapToGround(out vector transform[4], IEntity ent, int maxHeight, bool noUnderwater = false)
+	{
+		BaseWorld world = GetGame().GetWorld();
+		// if noUnderwater is true, check if terrain height at pos with noUnderwater true is the same as the ocean height
+		// if this is true, we know we are over the ocean so can snap the entity to the water surface
+		if (noUnderwater)
+		{
+			vector pos = transform[3];
+			float terrainHeight = SCR_TerrainHelper.GetTerrainY(pos, world, true);
+			if (terrainHeight == world.GetOceanBaseHeight())
+			{
+				pos[1] = world.GetOceanBaseHeight();
+				transform[3] = pos;
+				return;
+			}
+		}
+		vector dir = "0 -1 0";
+		dir[1] = dir[1] * maxHeight;
+		vector startPos = transform[3];
+		
+		autoptr TraceParam trace = new TraceParam();
+		trace.Start = startPos;
+		trace.End = startPos + dir;
+		trace.Flags = TraceFlags.WORLD | TraceFlags.ENTS;
+		trace.LayerMask = TRACE_LAYER_CAMERA;
+		trace.Exclude = ent;
+		
+		// #ESE_TODO - change this to whatever is needed now that noUnderwater is checked at the start
+		if (startPos[1] > world.GetOceanBaseHeight())
+		{
+			trace.Flags = trace.Flags | TraceFlags.OCEAN;
+		}
+		float traceDist = world.TraceMove(trace, null);
+		Print(traceDist);
+		
+		// check if trace reached maxHeight without hitting anything
+		if (traceDist >= maxHeight)
+		{
+			Print("traceDist > maxHeight");
+			return;
+		}
+		vector endpos = startPos + dir * traceDist;
+		Print(startPos);
+		Print(dir);
+		Print(endpos);
+		transform[3] = endpos;
+	}
+	// -----------------------------------------------------------------------------------------------------------
+	// #ESE_ADD_DOCUMENTATION
+	static void SnapAndOrientToGround(out vector transform[4], IEntity ent, int maxHeight, bool noUnderwater = false)
+	{
+		BaseWorld world = GetGame().GetWorld();
+		// if noUnderwater is true, check if terrain height at pos with noUnderwater true is the same as the ocean height
+		// if this is true, we know we are over the ocean so can snap the entity to the water surface
+		if (noUnderwater)
+		{
+			vector pos = transform[3];
+			float terrainHeight = SCR_TerrainHelper.GetTerrainY(pos, world, true);
+			if (terrainHeight == world.GetOceanBaseHeight())
+			{
+				pos[1] = world.GetOceanBaseHeight();
+				transform[3] = pos;
+				return;
+			}
+		}
+		vector dir = "0 -1 0";
+		dir[1] = dir[1] * maxHeight;
+		vector startPos = transform[3];
+		
+		autoptr TraceParam trace = new TraceParam();
+		trace.Start = startPos;
+		trace.End = startPos + dir;
+		trace.Flags = TraceFlags.WORLD | TraceFlags.ENTS;
+		trace.LayerMask = TRACE_LAYER_CAMERA;
+		trace.Exclude = ent;
+		
+		// #ESE_TODO - change this to whatever is needed now that noUnderwater is checked at the start
+		if (startPos[1] > world.GetOceanBaseHeight())
+		{
+			trace.Flags = trace.Flags | TraceFlags.OCEAN;
+		}
+		float traceDist = world.TraceMove(trace, null);
+		// check if trace reached maxHeight without hitting anything
+		if (traceDist >= maxHeight)
+		{
+			Print("traceDist > maxHeight");
+			return;
+		}
+		vector endpos = startPos + dir * traceDist;
+		transform[3] = endpos;
+		
+		// orient
+		vector normal = trace.TraceNorm;
+		vector perpend = normal.Perpend();
+		vector result[4];
+		
+		Math3D.DirectionAndUpMatrix(perpend, normal, result);
+		
+		vector basis[4];
+		Math3D.AnglesToMatrix(Vector(-perpend.VectorToAngles()[0], 0, 0), basis);
+		Math3D.MatrixMultiply3(result, basis, result);
+		result[3] = endpos;
+		
+		Math3D.MatrixMultiply3(result, transform, transform);
+	}
 	
 	// ------------------------------------------------------------- MODELS & MATERIALS ------------------------------------------------------------- //
 	

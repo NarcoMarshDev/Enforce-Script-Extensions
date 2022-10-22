@@ -6,7 +6,7 @@
 /**
 ESE_Queue Class
 
-Template class for first-in, first-out array of objects. Adding more objects that the max size will automatically
+Template class for first-in, first-out array of objects. Adding more objects than the max size will automatically
 Dequeue the oldest object in the queue.
 
 For full documentation check the wiki @ https://github.com/NarcoMarshDev/Enforce-Script-Extensions/wiki/ESE_Queue-Class

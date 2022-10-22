@@ -22,7 +22,7 @@ class ESE
 {	
 	static const int VERSION_MAJOR = 0;
 	static const int VERSION_MINOR = 2;
-	static const int VERSION_PATCH = 2;
+	static const int VERSION_PATCH = 1;
 	
 	// Base class for all ESE static methods, if we ever get modding support for core types many of these will get added to their respective classes as well
 	
