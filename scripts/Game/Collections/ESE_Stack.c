@@ -52,7 +52,7 @@ class ESE_Stack<Class T>
 		if (topIndex < 0)
 		{
 			#ifdef ESE_VERBOSE
-			Print("" + this + ": Attempted to peek index out of range ["+topIndex+"]", LogLevel.ERROR);
+			Print("" + this + ": Attempted to pop index out of range ["+topIndex+"]", LogLevel.ERROR);
 			#endif
 			return nullValue;
 		}
@@ -81,7 +81,7 @@ class ESE_Stack<Class T>
 		if (topIndex < 0)
 		{
 			#ifdef ESE_VERBOSE
-			Print("" + this + ": Attempted to peek index out of range ["+topIndex+"]", LogLevel.ERROR);
+			Print("" + this + ": Attempted to pop index out of range ["+topIndex+"]", LogLevel.ERROR);
 			#endif
 			output = nullValue;
 			return false;
@@ -162,6 +162,11 @@ class ESE_Stack<Class T>
 	{
 		Raw.Copy(oldArray);
 		Resize(oldArray.Count());
+	}
+	// ----------------------------------------------------------------------------------------------------------- //
+	void PrintRaw()
+	{
+		Print(Raw);
 	}
 	// ----------------------------------------------------------------------------------------------------------- //
 	void ESE_Stack(int size)

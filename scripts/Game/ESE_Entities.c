@@ -21,7 +21,6 @@ class ESE_Entities
 		IEntity newEntity = ESE.SpawnPrefab(mat, resource);
 	@endcode
 	*/
-	// #ESE_UPDATE_DOCUMENTATION - changed from using origin to transform
 	static IEntity SpawnPrefab(vector transform[4], ResourceName prefabName)
 	{
 		if (!prefabName)
@@ -127,7 +126,6 @@ class ESE_Entities
 		}
 	}
 	// -----------------------------------------------------------------------------------------------------------
-	// #ESE_ADD_DOCUMENTATION
 	/**
 	Snaps given entity to whatever is underneath it as long as it is less than maxHeight away.
 	Similar to SCR_TerrainHelper.SnapToTerrain() but uses a trace so it will snap to any entity not just the world terrain
@@ -184,7 +182,6 @@ class ESE_Entities
 		transform[3] = endpos;
 	}
 	// -----------------------------------------------------------------------------------------------------------
-	// #ESE_ADD_DOCUMENTATION
 	static void SnapAndOrientToGround(out vector transform[4], IEntity ent, int maxHeight, bool noUnderwater = false)
 	{
 		BaseWorld world = GetGame().GetWorld();
@@ -244,7 +241,6 @@ class ESE_Entities
 	
 	// ------------------------------------------------------------- MODELS & MATERIALS ------------------------------------------------------------- //
 	
-	// #ESE_ADD_DOCUMENTATION
 	// To be safe, use a string[256] array as the input for materials, use less for memory optimasation though if needed
 	static void GetMaterial(IEntity entity, out string materials[], out int numMaterials)
 	{

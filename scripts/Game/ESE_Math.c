@@ -8,7 +8,6 @@
 
 class ESE_Math
 {
-	// #ESE_ADD_DOCUMENTATION
 	static float CeilToNearestMultiple(float number, float multiple)
 	{
     	if (multiple != 0 && number != 0)

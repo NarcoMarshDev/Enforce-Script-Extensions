@@ -13,7 +13,6 @@ class ESE_IO
 		return readLen;
 	}
 	
-	// #ESE_ADD_DOCUMENTATION
 	// Works like csv reader but using space delimiters instead of commas
 	static int ReadSpaceDelimitedFileAsArray(string path, inout array<array<string>> output)
 	{
