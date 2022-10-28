@@ -77,6 +77,35 @@ class ESE_Entities
 		RplComponent.DeleteRplEntity(ent, false);
 	}
 	// -----------------------------------------------------------------------------------------------------------
+	// #ESE_ADD_DOCUMENTATION
+	// Checks if given entity can be picked up as an inventory item
+	static bool CanPickUpEntity(IEntity ent)
+	{
+		ActionsManagerComponent actionsManager = ActionsManagerComponent.Cast(ent.FindComponent(ActionsManagerComponent));
+		if (!actionsManager)
+			return false;
+		
+		array<BaseUserAction> actionsArray = new array<BaseUserAction>();
+		actionsManager.GetActionsList(actionsArray);
+		foreach (BaseUserAction action: actionsArray)
+		{
+			if (action.GetActionName() == "#AR-Inventory_PickUp")
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	// -----------------------------------------------------------------------------------------------------------
+	// #ESE_ADD_DOCUMENTATION
+	static bool IsEntityWeapon(IEntity ent)
+	{
+		if (ent.FindComponent(WeaponComponent) && CanPickUpEntity(ent))
+			return true;
+		
+		return false;
+	}
+	// -----------------------------------------------------------------------------------------------------------
 	// Returns alive state of given entity
 	static bool IsEntityAlive(IEntity entity)
 	{
