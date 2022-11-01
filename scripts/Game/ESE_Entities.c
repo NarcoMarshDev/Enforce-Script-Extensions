@@ -58,7 +58,7 @@ class ESE_Entities
 		}
 		ChimeraCharacter player = ESE.GetPlayerEntity(playerId);
 		Resource prefab = Resource.Load(prefabName);
-		EntitySpawnParams spawnParams;
+		EntitySpawnParams spawnParams = new EntitySpawnParams();
 		spawnParams.TransformMode = ETransformMode.WORLD;
 		player.GetWorldTransform(spawnParams.Transform);
 		
