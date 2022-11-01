@@ -17,7 +17,7 @@ Code example:
 @endcode
 */
 
-class ESE_DynamicQueue<Class T>
+class ESE_DynamicQueue<Class T>: Managed
 {
 	ref array<T> Raw = {};
 	T nullValue = null;

@@ -18,7 +18,7 @@ Code example:
 @endcode
 */
 
-class ESE_DynamicStack<Class T>
+class ESE_DynamicStack<Class T>: Managed
 {
 	ref array<T> Raw = {};
 	T nullValue = null;

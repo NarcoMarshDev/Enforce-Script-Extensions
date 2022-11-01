@@ -30,7 +30,7 @@ Code example:
 @endcode
 */
 
-class ESE_Queue<Class T>
+class ESE_Queue<Class T>: Managed
 {
 	ref array<T> Raw = {};
 	int MaxSize;

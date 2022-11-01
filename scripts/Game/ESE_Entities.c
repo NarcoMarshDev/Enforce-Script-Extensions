@@ -81,6 +81,7 @@ class ESE_Entities
 	// Checks if given entity can be picked up as an inventory item
 	static bool CanPickUpEntity(IEntity ent)
 	{
+		// consider replacing some of this with SCR_Global.FindActionsManagerComponent()
 		ActionsManagerComponent actionsManager = ActionsManagerComponent.Cast(ent.FindComponent(ActionsManagerComponent));
 		if (!actionsManager)
 			return false;

@@ -29,7 +29,7 @@ Code example:
 @endcode
 */
 
-class ESE_Stack<Class T>
+class ESE_Stack<Class T>: Managed
 {
 	ref array<T> Raw = {};
 	int MaxSize;
