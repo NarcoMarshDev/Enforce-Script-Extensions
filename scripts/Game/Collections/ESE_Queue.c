@@ -75,6 +75,16 @@ class ESE_Queue<Class T>: Managed
 		return value;
 	}
 	// ----------------------------------------------------------------------------------------------------------- //
+	bool TryEnqueue(T value)
+	{
+		if (Raw.Count() >= MaxSize)
+		{
+			return false;
+		}
+		Raw.InsertAt(value, 0);
+		return true;
+	}
+	// ----------------------------------------------------------------------------------------------------------- //
 	bool TryDequeue(out T output)
 	{
 		int lastIndex = Raw.Count() - 1;
