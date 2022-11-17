@@ -7,13 +7,17 @@ class TestClass
 	static int a;
 }
 
-[ESE_Preprocessor().Register()]
+[main()]
 int main()
 {
 	Print("main");
-	Print(globalInt);
-	
-	
+	ESE_Queue<int> queue = new ESE_Queue<int>(5);
+	for (int i = 0; i < 7; i++)
+	{
+		queue.Enqueue(i);
+	}
+	Print(queue);
+	Print(queue[3]);
 	
 	return 0;
 }
