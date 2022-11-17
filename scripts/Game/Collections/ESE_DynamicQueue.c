@@ -20,7 +20,7 @@ Code example:
 class ESE_DynamicQueue<Class T>: Managed
 {
 	ref array<T> Raw = {};
-	T nullValue = null;
+	T nullValue;
 	
 	// ----------------------------------------------------------------------------------------------------------- //
 	void Enqueue(T value)

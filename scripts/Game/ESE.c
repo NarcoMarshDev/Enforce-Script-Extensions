@@ -18,11 +18,21 @@ Code example:
 	TODO
 @endcode
 */
+//#include "$EnforceScriptExtensions:scripts/Game/Namespaces/Core.h"
+
 class ESE
-{	
+{
 	static const int VERSION_MAJOR = 0;
 	static const int VERSION_MINOR = 2;
 	static const int VERSION_PATCH = 2;
+	
+	// static class references for using main ESE class as a pseudo namespace (e.g. ESE.Entities.SnapToGround(); instead of ESE_Entities.SnapToGround();)
+	static ESE_Entities Entities;
+	static ESE_Aliases Aliases;
+	static ESE_Math Maths;
+	static ESE_IO IO;
+	static ESE_Reflection Reflection;
+	static ESE_InventoryHelper InventoryHelper;
 	
 	// Base class for all ESE static methods, if we ever get modding support for core types many of these will get added to their respective classes as well
 	
@@ -195,7 +205,7 @@ class ESE
 	
 	
 	#endif
-	
+		
 	// ---------------------------------------------------------------- Initialization ---------------------------------------------------------------- //
 	
 	// This is a huge mess of #ifdef's and all it does it print version information at runtime to the console and the current defines. Kinda useful but
