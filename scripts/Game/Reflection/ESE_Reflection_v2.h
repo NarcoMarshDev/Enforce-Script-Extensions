@@ -18,7 +18,7 @@ class ESE_MemberInfo: Managed
 {
 	ESE_Type DeclaringType;
 	ESE_Type ReflectingType;
-	ESE_Reflection_EMemberTypes MemberType;
+	ESE_EMemberTypes MemberType;
 	string Name;
 	
 	bool Equals(Class obj) {return this && obj;}
@@ -38,7 +38,7 @@ class ESE_Type: ESE_MemberInfo
 	
 	bool EqualsObj(Class obj) 	{return Type && obj;}
 	bool EqualsType(typename T) {return Type && T;}
-	array<ESE_MemberInfo> FindMembers(ESE_Reflection_EMemberTypes memberType, ESE_Reflection_EBindingFlags bindingFlags)
+	array<ESE_MemberInfo> FindMembers(ESE_EMemberTypes memberType, ESE_EBindingFlags bindingFlags)
 	{
 		
 	}
@@ -59,8 +59,8 @@ class ESE_Type: ESE_MemberInfo
 // ---------------------------------------------------------------------------------------------------------------
 class ESE_Reflection
 {
-	static const ESE_Reflection_EMemberTypes 	EMemberTypes;
-	static const ESE_Reflection_EBindingFlags 	EBindingFlags;
+	static const ESE_EMemberTypes 	EMemberTypes;
+	static const ESE_EBindingFlags 	EBindingFlags;
 	
 	static ESE_ReflectionProperty 					NewProperty(typename type, string name) {return new ESE_ReflectionProperty(type, name);}
 	static array<autoptr ESE_ReflectionProperty> 	NewPropertyArray() 			  			{return new array<autoptr ESE_ReflectionProperty>();}

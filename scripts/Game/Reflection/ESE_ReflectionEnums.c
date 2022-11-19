@@ -1,4 +1,4 @@
-enum ESE_Reflection_EMemberTypes
+enum ESE_EMemberTypes
 {
 	Constructor = 1,
 	Event 		= 2,
@@ -11,7 +11,7 @@ enum ESE_Reflection_EMemberTypes
 	All 		= 256
 }
 
-enum ESE_Reflection_EBindingFlags
+enum ESE_EBindingFlags
 {
 	Default 	   = 0,
 	Ignore 		   = 1,
