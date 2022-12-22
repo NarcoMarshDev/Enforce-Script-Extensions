@@ -1,0 +1,87 @@
+#ifdef ESE_DEVMODE
+
+int globalInt;
+
+//[ExportCore()]
+void ExportCore()
+{
+	array<string> paths = {};
+	System.FindFiles(paths.Insert, "$core:scripts/", ".c");
+	
+	foreach (string path: paths)
+	{
+		string fileName = FilePath.StripPath(path);
+		Print(fileName);
+		
+		string stripped = FilePath.StripFileName(path);
+		stripped.Replace("$core:", "");
+		stripped = stripped.Substring(0, stripped.Length() - 1);
+		//Print(stripped);
+		
+		array<string> tokens = {};
+		stripped.Split("/", tokens, true);
+		//Print(tokens);
+		
+		string str = "$EnforceScriptExtensions:scripts/Game/Reflection/CoreExport/";
+		foreach (string token: tokens)
+		{
+			str += token + "/";
+			FileIO.MakeDirectory(str);
+		}
+		
+		array<string> allLines = {};
+		FileHandle readHandle = FileIO.OpenFile(path, FileMode.READ);
+		string line;
+		while (readHandle.FGets(line) >= 0)
+		{
+			allLines.Insert(line);
+		}
+		readHandle.CloseFile();
+		
+		FileHandle writeHandle = FileIO.OpenFile(str + fileName, FileMode.WRITE);
+		foreach (string writeLine: allLines)
+		{
+			writeHandle.FPrintln(writeLine);
+		}
+		writeHandle.CloseFile();
+	}
+}
+
+class TestClass
+{
+	static int a = 1;
+	private static int b = 2;
+	
+	private static void Bruh()
+	{
+		Print("private function");
+	}
+	
+	static void Bruh2()
+	{
+		Print("public function");
+	}
+	
+	void Bruh3()
+	{
+		Print("non-static function");
+	}
+}
+
+
+[main()]
+int main()
+{	
+	ScriptInvoker invoker = new ScriptInvoker();
+	invoker.Insert(TestClass.Bruh);
+	invoker.Invoke();
+	invoker.Clear();
+	invoker.Invoke();
+	
+	return 0;
+	ESE_Reflection.UpdateTypeReferences();
+	return 0;
+}
+
+int exitcode = main();
+#endif

@@ -60,10 +60,23 @@ class ESE_Reflection
 	static const ESE_EBindingFlags 	EBindingFlags;
 	
 	// -----------------------------------------------------------------------------------------------------------
-	static array<string> GetAllClasses()
+	// This isn't private in case anyone wants to mess with it, but this should only be called at compile time via attribute call
+	//[UpdateTypeReferences()]
+	static void UpdateTypeReferences()
 	{
-		array<string> allClasses = {}; //output
-		
+		auto types = GetAllClasses();
+		FileHandle classRefFile = FileIO.OpenFile("$EnforceScriptExtensions:scripts/Game/Reflection/ESE_ClassReferences.csv", FileMode.WRITE);
+		foreach (string type: types)
+		{
+			classRefFile.FPrintln(type);
+		}
+		classRefFile.CloseFile();
+	}
+	
+	// -----------------------------------------------------------------------------------------------------------
+	static array<string> GetAllClasses()
+	{	
+		array<string> outArray = {};
 		// go through all addons so we can find the files in each, like $core, $ArmaReforger, $EnforceScriptExtensions, etc.
 		array<string> addons = {};
 		GameProject.GetAvailableAddons(addons);
@@ -119,18 +132,18 @@ class ESE_Reflection
 						
 						tokens.Insert(file);
 						//Print(tokens);
-						if (allClasses.Contains(tokens[0]))
+						if (outArray.Contains(tokens[0]))
 						{
 							duplicates.Insert(tokens[0] + " : " + file);
 						}
-						allClasses.Insert(tokens[0] + "," + file);
+						outArray.Insert(tokens[0] + "," + file);
 					}
 				}
 				fHandle.CloseFile();
 			}
 		}
 		Print(duplicates);
-		return allClasses;
+		return outArray;
 	}
 	
 	// -----------------------------------------------------------------------------------------------------------

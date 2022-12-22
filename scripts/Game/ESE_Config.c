@@ -5,7 +5,7 @@
 /** -------------------------------------------------------- READ THIS --------------------------------------------------------
 
 	Different functionality of ESE can be enabled or disabled by defining some different values. To do so, duplicate this file
-	and name it ' !ESE_Config.c ' and then uncomment whatever #define statements you want, to enable those features.
+	and name it ' !ESE_Config_YourAddonName.c ' and then uncomment whatever #define statements you want, to enable those features.
 
 	Full documentation : https://github.com/NarcoMarshDev/Enforce-Script-Extensions/wiki/Setting-Up-ESE#making-your-ese-config
 

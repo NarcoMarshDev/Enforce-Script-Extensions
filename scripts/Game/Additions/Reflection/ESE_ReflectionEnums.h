@@ -1,14 +1,12 @@
 enum ESE_EMemberTypes
 {
+	None		= 0,
 	Constructor = 1,
 	Event 		= 2,
 	Field 		= 4,
 	Method 		= 8,
 	Property 	= 16,
-	TypeInfo 	= 32,
-	Custom 		= 64,
-	NestedType 	= 128,
-	All 		= 256
+	All 		= 32
 }
 
 enum ESE_EBindingFlags
@@ -20,6 +18,19 @@ enum ESE_EBindingFlags
 	Static 		   = 8,
 	Public		   = 16,
 	NonPublic	   = 32,
-	CreateInstance = 64,
-	
+	CreateInstance = 64
+}
+
+enum EPrimitiveTypes
+{
+	bool,
+	float,
+	int,
+	ResourceName,
+	SharedItemRef,
+	string,
+	typename,
+	vector,
+	Class,
+	void
 }

@@ -236,6 +236,7 @@ class ESE_Aliases
 	#endif
 	
 	#ifdef ESE_ALIASES_DEBUG
+	// #ESE_TODO - Replace with ParamEnumArray.FromEnum(ESE_EResourceType);
 	private static const autoptr array<string> m_pEnumLookupArray = 
 	{
 	"Handgun",

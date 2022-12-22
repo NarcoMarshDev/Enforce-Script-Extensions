@@ -31,7 +31,9 @@ class ESE
 	static ESE_Aliases Aliases;
 	static ESE_Math Maths;
 	static ESE_IO IO;
+#ifdef ESE_ENABLE_REFLECTION
 	static ESE_Reflection Reflection;
+#endif
 	static ESE_InventoryHelper InventoryHelper;
 	
 	// Base class for all ESE static methods, if we ever get modding support for core types many of these will get added to their respective classes as well

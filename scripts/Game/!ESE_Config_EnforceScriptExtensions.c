@@ -22,11 +22,20 @@
 //#define ESE_ALIASES_EQUIPMENT
 //#define ESE_ALIASES_VEHICLES
 #define ESE_ALIASES_DEBUG
+//#define ESE_ENABLE_REFLECTION
 
 #endif
 
 // -------------------- DO NOT MODIFY BEYOND THIS POINT --------------------
 
+#ifdef ESE_ENABLE_REFLECTION
+// Include all reflection classes if enabled
+#include "$EnforceScriptExtensions:scripts/Game/Additions/Reflection/ESE_Reflection.h"
+#include "$EnforceScriptExtensions:scripts/Game/Additions/Reflection/ESE_ReflectionEnums.h"
+#include "$EnforceScriptExtensions:scripts/Game/Additions/Reflection/ESE_Type.h"
+#include "$EnforceScriptExtensions:scripts/Game/Additions/Reflection/ESE_MemberInfo.h"
+#include "$EnforceScriptExtensions:scripts/Game/Additions/Reflection/ESE_ScriptParser.h"
+#endif
 // Pre-processor enable all other alias defines if ESE_ALIASES_ALL is defined
 #ifdef ESE_ALIASES_ALL
 #define ESE_ALIASES_MATERIALS

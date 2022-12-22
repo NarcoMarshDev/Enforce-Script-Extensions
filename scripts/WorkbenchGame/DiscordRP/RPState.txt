@@ -1,0 +1,3 @@
+No File Open...
+Enforce Script Extensions
+resourcemanager

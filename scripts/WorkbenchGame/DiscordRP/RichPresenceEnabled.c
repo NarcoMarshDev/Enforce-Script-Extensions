@@ -1,0 +1,1 @@
+bool DISCORD_RICH_PRESENCE_ENABLED = false;
