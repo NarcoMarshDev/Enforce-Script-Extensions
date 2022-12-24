@@ -154,6 +154,10 @@ class DiscordRP: WorkbenchPlugin
 	
 	void ~DiscordRP()
 	{
+		if (!DISCORD_RICH_PRESENCE_ENABLED)
+		{
+			return;
+		}
 		Workbench.KillProcess(DISCORD_RICH_PRESENCE_HANDLE);
 		DISCORD_RICH_PRESENCE_RUNNING = false;
 	}
