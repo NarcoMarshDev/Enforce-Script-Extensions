@@ -6,7 +6,7 @@
 
 // This is a custom config for developing ese internally, it can all be ignored
 
-#define ESE_DEVMODE // remember to comment off before releases
+//#define ESE_DEVMODE // remember to comment off before releases
 
 #ifdef ESE_DEVMODE
 

@@ -1,11 +1,9 @@
 # Enforce-Script-Extensions v0.2.2 pre-release
-A collection of new data types, methods, aliases etc. for Arma Reforger to help streamline the scripting experience.
+A function library and other additions for Arma Reforger to help streamline the scripting experience.
 
 For full documentation, [see the wiki](https://github.com/NarcoMarshDev/Enforce-Script-Extensions/wiki).
 # Installation
-__I DO NOT RECOMMEND INSTALLING ESE IN THIS PRERELEASE STATE AS A FULL PROJECT__
-
-ESE will be released on the workshop at a date TBA, for now I would simply browse through the files and take any methods you want and copy them to your own project. If you do want to use it as a full project however, clone this repo and add it as an existing project in the enfusion workbench, BUT BE CAREFUL! Things are changing a lot still, and using these pre-release versions may cause compatibility issues when it releases. I would highly recommend renaming all the files and classes to "OLD_ESE..." so they remain seperate from release versions.
+ESE can be downloaded from the Arma Reforger workshop and added as a dependency in your project, this installation will recieve automatic updates as they are published to the workshop. Due to the potential major changes at this early stage of development however, be ready to make changes to your implementation of ESE in your projects as **future compatibility isn't yet garunteed until version 1.0**
 # Supporting ESE In Your Mod
 ESE just needs to be added as a dependency in your mod to work, but if you want to add your own aliases for your custom resources, see the wiki for a [guide](https://github.com/NarcoMarshDev/Enforce-Script-Extensions/wiki/Adding-Custom-Aliases-In-Your-Mod) to add your own aliases using a simple modded class.
 # Contributing & Suggestions
